@@ -12,15 +12,19 @@ export function calculateInvestmentResults({
 }) {
   const annualData = [];
   let investmentValue = initialInvestment;
-
+  let interestTotal = 0;
   for (let i = 0; i < duration; i++) {
     const interestEarnedInYear = investmentValue * (expectedReturn / 100);
+    interestTotal += interestEarnedInYear;
     investmentValue += interestEarnedInYear + annualInvestment;
+    const year = i + 1;
     annualData.push({
-      year: i + 1, // year identifier
+      year, // year identifier
       interest: interestEarnedInYear, // the amount of interest earned in this year
       valueEndOfYear: investmentValue, // investment value at end of year
       annualInvestment: annualInvestment, // investment added in this year
+      interestTotal, // cumulative sum of interest earned
+      capitalInvested: initialInvestment + year*annualInvestment // total amount of money invested each year
     });
   }
 
