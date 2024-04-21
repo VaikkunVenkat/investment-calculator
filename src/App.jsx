@@ -5,30 +5,30 @@ import InvestmentReturnsTable from "./components/InvestmentReturnsTable";
 import { calculateInvestmentResults } from "./util/investment";
 function App() {
   const [calculatorInputs, setCalculatorInputs] = useState({
-    initialInvestment: "",
-    annualInvestment: "",
-    expectedReturn: "",
-    duration: "",
+    initialInvestment: 15000,
+    annualInvestment: 1200,
+    expectedReturn: 6,
+    duration: 8,
   });
 
-  const handleCalculationInputChange = ({ target: { id, value } }) => {
+  const handleCalculationInputChange = (id, value) => {
     setCalculatorInputs((prevCalculationFields) => ({
       ...prevCalculationFields,
       [id]: +value,
     }));
   };
 
-  const results = calculateInvestmentResults(calculatorInputs);
-
   return (
     <>
       <Header />
       <CalculatorInputs
         inputValues={calculatorInputs}
-        onChange={handleCalculationInputChange}
+        onCalculatorChange={handleCalculationInputChange}
       />
       {calculatorInputs.duration > 0 ? (
-        <InvestmentReturnsTable results={results} />
+        <InvestmentReturnsTable
+          results={calculateInvestmentResults(calculatorInputs)}
+        />
       ) : (
         <p className="center">Duration should be positive</p>
       )}

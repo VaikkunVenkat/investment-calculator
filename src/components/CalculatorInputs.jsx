@@ -1,6 +1,9 @@
 import Input from "./Input";
 
-const CalculatorInputs = ({ inputValues, onChange }) => {
+const CalculatorInputs = ({ inputValues, onCalculatorChange }) => {
+  const handleChange = ({ target: { id, value } }) => {
+    onCalculatorChange(id, value)
+  }
   return (
     <form id="user-input" className="input-group">
       <div>
@@ -8,13 +11,13 @@ const CalculatorInputs = ({ inputValues, onChange }) => {
           id="initialInvestment"
           label="Initial Investment"
           value={inputValues.initialInvestment}
-          onChange={onChange}
+          onChange={handleChange}
         />
         <Input
           id="annualInvestment"
           label="Annual Investment"
           value={inputValues.annualInvestment}
-          onChange={onChange}
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -22,13 +25,13 @@ const CalculatorInputs = ({ inputValues, onChange }) => {
           id="expectedReturn"
           label="Expected Return"
           value={inputValues.expectedReturn}
-          onChange={onChange}
+          onChange={handleChange}
         />
         <Input
           id="duration"
           label="Duration"
           value={inputValues.duration}
-          onChange={onChange}
+          onChange={handleChange}
         />
       </div>
     </form>
